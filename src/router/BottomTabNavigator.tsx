@@ -1,0 +1,64 @@
+import React from "react";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import {AnimatedTabBarNavigator} from "react-native-animated-nav-tab-bar";
+import Calculate from "../screen/Calculate";
+import Reports from "../screen/Reports";
+import Settings from "../screen/Settings";
+import { ColorValue } from "react-native";
+
+const Tab = AnimatedTabBarNavigator();
+
+export function BottomTabNavigator() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{
+        activeBackgroundColor: '#7e22ce',
+        activeTintColor: "white",
+        inactiveTintColor: "white"
+      }}
+      appearance={{
+        floating: true,
+        tabBarBackground: "#111827"
+      }}>
+      <Tab.Screen
+        name="Calculate"
+        component={Calculate}
+        options={{
+          tabBarIcon: (color: number | ColorValue | undefined, size: number | undefined) => (
+            <Ionicons
+              name="md-alarm-outline"
+              size={size ? size : 24}
+              color={color}
+            />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Reports"
+        component={Reports}
+        options={{
+          tabBarIcon: (color: number | ColorValue | undefined, size: number | undefined)  => (<Ionicons
+              name="file-tray-outline"
+              size={size ? size : 24}
+              color={color}
+            />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarIcon: (color: number | ColorValue | undefined, size: number | undefined)  => (
+            <Ionicons
+              name="md-settings-outline"
+              size={size ? size : 24}
+              color={color}
+            />
+          )
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
