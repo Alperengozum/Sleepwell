@@ -2,7 +2,7 @@
 
 [**LIVE on Google Play Store**](https://play.google.com/store/apps/details?id=com.alperengozum.sleepwell)
 
-Which powers Sleepwell has?
+## Which powers Sleepwell has?
 - When to wake up?, When to go to bed?, Go to bed now, Power nap calculations.
 - Set selected alarm after calculation.
 - Fall Asleep Time in settings.
