@@ -148,7 +148,7 @@ export default function InfoHeader(props: { children: React.ReactNode; }) {
                       color="white"
                       size="lg"
                       onPress={() => navigation.goBack()}
-                      icon={<Icon as={MaterialCommunityIcons} name="arrow-left" size="2xl"/>}
+                      icon={<Icon as={MaterialCommunityIcons} name="arrow-left" size="2xl" color="white"/>}
           />
           <Heading color="white" size="lg" letterSpacing={0.1} fontWeight="lighter">
             Informations
