@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Animated, NativeScrollEvent, NativeSyntheticEvent, StyleSheet} from "react-native";
 import {Heading, HStack, Icon, IconButton, Text, View, VStack} from "native-base";
 import {useLinkTo} from "@react-navigation/native";
@@ -6,9 +6,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import LiveClock from "../clock/LiveClock";
 import RBSheet from "react-native-raw-bottom-sheet";
+import {is24HourFormat} from "react-native-device-time-format";
 
 export default function CalculatorHeader(props: { children: React.ReactNode; }) {
   const linkTo = useLinkTo();
+  const [is24Hour, setIs24Hour] = useState<boolean | undefined>(undefined);
 
   const HEADER_MAX_HEIGHT = 240;
   const HEADER_MIN_HEIGHT = 150;
@@ -100,6 +102,12 @@ export default function CalculatorHeader(props: { children: React.ReactNode; }) 
     linkTo("/Info");
   }
 
+  useEffect(()=>{
+
+    const findTimeFormat = async () => {setIs24Hour(await is24HourFormat())}
+    findTimeFormat();
+  }, [])
+
   return (
     <View style={styles.saveArea}>
       <Animated.ScrollView
@@ -149,7 +157,7 @@ export default function CalculatorHeader(props: { children: React.ReactNode; }) 
             </Heading>
 
           </HStack>
-          <LiveClock/>
+          {is24Hour != undefined ? <LiveClock is24Hour={is24Hour}/> : <React.Fragment/>}
           <Text color="gray.400">
             {moment().format("dddd, D MMMM YYYY")}
           </Text>

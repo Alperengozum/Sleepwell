@@ -8,8 +8,11 @@ import {MainNavigator} from "./src/router/MainNavigator";
 import SyncStorage from 'sync-storage';
 
 const App = () => {
-  useEffect(async () => {
-    await SyncStorage.init();
+  useEffect( () => {
+    const initSyncStorage = async () => {
+      await SyncStorage.init();
+    }
+    initSyncStorage();
     StatusBar.setHidden(true);
     changeNavigationBarColor("black", false, false);
     hideNavigationBar()

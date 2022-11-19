@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment";
 import {Text} from 'native-base';
+import {is24HourFormat} from "react-native-device-time-format";
 
-export default function LiveClock() {
-  const [time, setTime] = useState(moment().format("hh:mm"));
+export default function LiveClock(props) {
+  const {is24Hour} = props;
+  const [time, setTime] = useState(moment().format(is24Hour ? 'HH:mm' : 'hh:mm'));
 
   useEffect(() => {
     setInterval(update, 1000);
   })
 
   const update = () => {
-    setTime(moment().format("hh:mm"));
+    setTime(moment().format(is24Hour ? 'HH:mm' : 'hh:mm'));
   };
 
   return (
