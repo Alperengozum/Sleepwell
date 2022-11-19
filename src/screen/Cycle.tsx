@@ -1,8 +1,7 @@
-import {View} from "native-base";
 import React, {useEffect} from "react";
 import CycleHeader from "../components/headers/CycleHeader";
 import {CycleList} from "../components/lists/CycleList";
-import {hideNavigationBar, showNavigationBar} from "react-native-navigation-bar-color";
+import {showNavigationBar} from "react-native-navigation-bar-color";
 import {useNavigation} from "@react-navigation/native";
 
 export default function Cycle(props) {

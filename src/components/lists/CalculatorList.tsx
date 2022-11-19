@@ -90,11 +90,11 @@ export const CalculatorList = () => {
   }
 
   const whenToWakeUp = (): void => {
-    showTimePicker('Select when to go to bed.', true);
+    showTimePicker('Select bed time.', true);
   }
 
   const whenToGoToBed = (): void => {
-    showTimePicker('Select when to wake up.', false);
+    showTimePicker('Select wake up time.', false);
   }
 
   const takeAPowerNap = (): void => {

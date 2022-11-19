@@ -7,6 +7,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import {createAlarm} from "react-native-send-intent";
 import SleepStore, {SleepType} from "../../store/SleepStore";
 import SettingsStore, {SettingsType} from "../../store/SettingsStore";
+import {is24HourFormat} from "react-native-device-time-format";
 
 interface List {
   name: string | number;
@@ -29,10 +30,24 @@ export const createIntentAlarm = (date: Date, type?: SleepType, cycleCount?: num
   })
 }
 
+export const formatHour = (hours: string, is24Hour: undefined | boolean): string => {
+  if(is24Hour){return hours;}
+  else {
+    let formattedHours = parseInt(hours) % 12;
+     formattedHours = formattedHours ? formattedHours : 12;
+     if(formattedHours < 10){
+       return "0"+formattedHours.toString();
+     }
+     return formattedHours.toString();
+  }
+}
+
 export const addHours = (date: Date, hours: number): Date => {
   return new Date(date.getTime() + hours * 3600000);
 }
+
 export const CycleList = (props: { params: any; }) => {
+  const [is24Hour, setIs24Hour] = useState<boolean | undefined>(undefined);
   const [list, setList] = useState<Array<List>>([
     {
       name: "Sleep",
@@ -41,6 +56,11 @@ export const CycleList = (props: { params: any; }) => {
       icon: <Icon color="white" as={MaterialCommunityIcons} name="power-sleep" size="2xl"/>
     },
   ]);
+
+  useEffect(()=>{
+    const findTimeFormat = async () => {setIs24Hour(await is24HourFormat())}
+    findTimeFormat();
+  }, [])
 
   const buildList = (params: any) => {
     //Calculate when to go to bed
@@ -56,7 +76,7 @@ export const CycleList = (props: { params: any; }) => {
         tempList.push({
           type: ListType.ITEM,
           name: i,
-          desc: `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}`,
+          desc: `${formatHour(("0" + date.getHours()).slice(-2), is24Hour)}:${("0" + date.getMinutes()).slice(-2)}`,
           onClick: () => createIntentAlarm(date, SleepType.SLEEP, i)
         })
       }
@@ -71,7 +91,7 @@ export const CycleList = (props: { params: any; }) => {
         tempList.push({
           type: ListType.ITEM,
           name: i,
-          desc: `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}`,
+          desc: `${formatHour(("0" + date.getHours()).slice(-2), is24Hour)}:${("0" + date.getMinutes()).slice(-2)}`,
           onClick: () => createIntentAlarm(date, SleepType.SLEEP, i)
         })
       }
@@ -91,6 +111,11 @@ export const CycleList = (props: { params: any; }) => {
 
   useEffect(() => {
     buildList(props.params);
+  }, [])
+
+  useEffect(()=>{
+    const findTimeFormat = async () => {setIs24Hour(await is24HourFormat())}
+    findTimeFormat();
   }, [])
 
   return (
