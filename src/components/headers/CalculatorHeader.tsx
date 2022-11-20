@@ -5,7 +5,6 @@ import {useLinkTo} from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
 import LiveClock from "../clock/LiveClock";
-import RBSheet from "react-native-raw-bottom-sheet";
 import {is24HourFormat} from "react-native-device-time-format";
 
 export default function CalculatorHeader(props: { children: React.ReactNode; }) {

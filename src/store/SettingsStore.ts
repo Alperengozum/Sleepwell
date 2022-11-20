@@ -4,6 +4,7 @@ import {setItem} from "../utils/AsyncStorageUtils";
 
 export enum SettingsType {
   FALL_ASLEEP = "Fall Asleep",
+  SUPPORT_ME = "Support Me"
 }
 
 export interface Settings {
@@ -41,7 +42,6 @@ class SettingsStore implements ISettingsStore {
       let filteredSettings = this.settings.filter((setting) => setting.type == type);
       return filteredSettings;
     }
-
     return this.settings;
   }
 
@@ -72,11 +72,11 @@ class SettingsStore implements ISettingsStore {
   }
 
   editSetting(type: SettingsType, value: string | number | undefined): void {
-    this.settings?.map((s) => {
-      if (s.type = type) {
-        return s.value = value;
+    this.settings = this.settings?.map((s) => {
+      if (s.type == type) {
+         s.value = value;
       }
-
+      return s;
     });
     setItem("settings", this.settings)
 

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment";
 import {Text} from 'native-base';
-import {is24HourFormat} from "react-native-device-time-format";
 
 export default function LiveClock(props) {
   const {is24Hour} = props;

@@ -6,6 +6,7 @@ import changeNavigationBarColor, {hideNavigationBar} from 'react-native-navigati
 import {StatusBar} from 'react-native';
 import {MainNavigator} from "./src/router/MainNavigator";
 import SyncStorage from 'sync-storage';
+import 'react-native-reanimated'
 
 const App = () => {
   useEffect( () => {

@@ -137,7 +137,7 @@ export const CalculatorList = () => {
   }
   useEffect(()=> {
     mobileAds().initialize();
-  })
+  }, [])
 
   useEffect(() => {
     const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {

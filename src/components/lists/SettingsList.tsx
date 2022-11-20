@@ -1,12 +1,11 @@
 import React from "react";
 import {FlashList} from "@shopify/flash-list";
-import {HStack, Icon, IconButton, Text, View, VStack} from "native-base";
-import {GenericCard} from "../cards/GenericCard";
+import {HStack, Text, View} from "native-base";
 import {GenericHeaderCard} from "../cards/GenericHeaderCard";
 import {Observer} from "mobx-react";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import SettingsStore, {Settings, SettingsType} from "../../store/SettingsStore";
 import {FallAsleepCard} from "../cards/FallAsleepCard";
+import {SupportMeCard} from "../cards/SupportMeCard";
 
 interface List {
   name: string | number;
@@ -28,14 +27,14 @@ export const SettingsList = () => {
     let tempList: Array<Settings> | undefined = SettingsStore.getSettings();
     let newList: Array<List> = [];
     if (tempList) tempList.forEach((settings: Settings) => {
-      newList.push({
-        type: ListType.ITEM,
-        name: settings.type,
-        desc: settings.value,
-        id: settings.id
-      })
+        newList.push({
+          type: ListType.ITEM,
+          name: settings.type,
+          desc: settings.value,
+          id: settings.id
+        })
     })
-    return newList;
+    return newList.filter((a, i) => newList.findIndex((s) => a.name === s.name) === i)
   }
 
   const stickyHeaderIndices = buildList()
@@ -67,6 +66,8 @@ export const SettingsList = () => {
                 switch (item.name) {
                   case SettingsType.FALL_ASLEEP:
                     return <FallAsleepCard/>
+                  case SettingsType.SUPPORT_ME:
+                    return <SupportMeCard/>
                   default:
                     return <React.Fragment/>
                 }
