@@ -17,7 +17,7 @@ export interface Sleep {
 
 export interface ISleepStore {
 
-  getSleeps(type?: SleepType): Array<Sleep> | undefined;
+  getSleeps(type?: SleepType, lastDayCount?: number): Array<Sleep> | undefined;
 
   setSleeps(sleeps: Array<Sleep>): void;
 
@@ -37,15 +37,20 @@ class SleepStore implements ISleepStore {
   }
 
 
-  getSleeps(type?: SleepType): Array<Sleep> | undefined {
+  getSleeps(type?: SleepType, lastDayCount?: number): Array<Sleep> | undefined {
     if (!this.sleeps) {
       return undefined
     }
+    let sleeps = this.sleeps
     if (type) {
-      let filteredSleep = this.sleeps.filter((sleep) => sleep.type == type);
-      return filteredSleep;
+      sleeps = this.sleeps.filter((sleep) => sleep.type == type);
     }
-    return this.sleeps;
+    if (lastDayCount) {
+        const lastDay = new Date();
+        lastDay.setMilliseconds(lastDay.getMilliseconds() - lastDayCount * 24 * 60 * 60 * 1000);
+        sleeps = sleeps.filter((sleep) => sleep.start > lastDay);
+    }
+    return sleeps;
   }
 
   setSleeps(sleeps: Array<Sleep>): void {

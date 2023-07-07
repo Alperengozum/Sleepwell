@@ -17,7 +17,7 @@ export const SleepIndicatorChart = () => {
   return (
     <Observer>
       {() => {
-        let data = SleepStore.getSleeps()?.map((sleep) => sleep.cycle).filter((sleep) => (sleep != undefined))
+        let data = SleepStore.getSleeps( undefined, 30)?.map((sleep) => sleep.cycle).filter((sleep) => (sleep != undefined))
         if (!data){
           data = [0]
         }
@@ -26,7 +26,7 @@ export const SleepIndicatorChart = () => {
         }
 
         return (
-          <GenericCard style={{marginVertical: 10, backgroundColor: "#440e6a"}}>
+          <GenericCard style={{marginVertical: 10, backgroundColor: "#440e6a", display: "flex"}} >
             <HStack my={5} mr={5} justifyContent="space-between" alignItems="center" textAlign="center"
                     divider={<Divider/>}>
               <VStack mx={5} flex={1} alignItems="center">
