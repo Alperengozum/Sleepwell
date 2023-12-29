@@ -24,7 +24,6 @@ enum ListType {
 
 export const createIntentAlarm = (date: Date, type?: SleepType, cycleCount?: number): void => {
 	let createDate: Date = new Date();
-	console.log(date.getMinutes())
 	startActivityAsync("android.intent.action.SET_ALARM", {
 		extra: {
 			'android.intent.extra.alarm.HOUR': date.getHours(),

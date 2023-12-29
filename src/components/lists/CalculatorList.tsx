@@ -14,6 +14,7 @@ import {addHours, createIntentAlarm} from "./CycleList";
 import {Observer} from "mobx-react";
 import {SleepType} from "../../store/SleepStore";
 import mobileAds, {AdEventType, InterstitialAd, TestIds} from 'react-native-google-mobile-ads';
+import {getCalendars} from "expo-localization";
 
 
 interface List {
@@ -115,7 +116,7 @@ export const CalculatorList = () => {
             value: currentTime,
             titleText: title,
             mode: AndroidPickerMode.TIME,
-            is24Hours: false,
+            is24Hour: getCalendars()[0].uses24hourClock || false,
             inputMode: AndroidTimeInputMode.CLOCK,
             negativeButtonText: " ",
             onConfirm: (time: Date) => {
