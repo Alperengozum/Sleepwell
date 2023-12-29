@@ -1,0 +1,50 @@
+import {HStack, Icon, IconButton, Text, View, VStack} from "native-base";
+import React from "react";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import SettingsStore, {SettingsType} from "../../store/SettingsStore";
+import {GenericCard} from "./GenericCard";
+
+export const FallAsleepCard = () => {
+
+  const onAddPress = () => {
+    const value = (SettingsStore.getSettings(SettingsType.FALL_ASLEEP)![0].value as number || 0) + 5;
+    SettingsStore.editSetting(SettingsType.FALL_ASLEEP, value);
+  }
+  const onMinusPress = () => {
+    let value = (SettingsStore.getSettings(SettingsType.FALL_ASLEEP)![0].value as number || 0) - 5;
+    if (value < 0) value = 0;
+    SettingsStore.editSetting(SettingsType.FALL_ASLEEP, value);
+  }
+
+
+  return (
+    <GenericCard style={{marginVertical: 10}}>
+      <HStack my={5} mr={5} justifyContent="space-between" alignItems="center" textAlign="center">
+        <VStack mx={5} flex={1}>
+          <Text color="white" fontSize="lg">{SettingsType.FALL_ASLEEP + " Time"}</Text>
+          <Text color="gray.400" fontSize="md">How many minutes does it take to fall asleep?</Text>
+        </VStack>
+        <View flex={1}>
+          <HStack alignItems="center" justifyContent="flex-end" space={5}>
+            <IconButton colorScheme="red"
+                        borderRadius="15"
+                        size="md"
+                        variant="outline"
+                        icon={<Icon as={Ionicons} name="remove-outline"/>}
+                        onPress={onMinusPress}
+            />
+            <Text color="white"
+                  fontSize="xl">{SettingsStore.getSettings(SettingsType.FALL_ASLEEP)![0].value || 0}</Text>
+            <IconButton colorScheme="emerald"
+                        borderRadius="15"
+                        size="md"
+                        variant="outline"
+                        icon={<Icon as={Ionicons} name="add-outline"/>}
+                        onPress={onAddPress}
+            />
+          </HStack>
+        </View>
+      </HStack>
+    </GenericCard>
+  );
+};
