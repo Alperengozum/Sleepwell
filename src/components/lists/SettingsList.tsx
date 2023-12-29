@@ -50,7 +50,7 @@ export const SettingsList = () => {
   return (
     <Observer>
       {() => (
-        <View width="100%" mt={50}>
+        <View width={"100%"} h={"100%"} mt={50}>
           <FlashList
             data={buildList()}
             renderItem={({item}) => {

@@ -88,7 +88,7 @@ export const InfoList = () => {
     .filter((item: number | null) => item !== null) as number[];
 
   return (
-    <View width="100%" mt={50}>
+    <View width={"100%"} h={"100%"} mt={50}>
       <FlashList
         data={list}
         renderItem={({item}) => {

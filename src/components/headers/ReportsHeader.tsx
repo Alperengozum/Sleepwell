@@ -86,7 +86,7 @@ export default function ReportsHeader(props: { children: React.ReactNode; }) {
       right: 0
     },
     topHeaderBar: {
-      height: 120,
+      height: 80,
       alignItems: "center",
       justifyContent: "center",
       position: "absolute",
@@ -102,22 +102,7 @@ export default function ReportsHeader(props: { children: React.ReactNode; }) {
 
   return (
     <View style={styles.saveArea}>
-      <Animated.ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{paddingTop: HEADER_MAX_HEIGHT - 32, paddingBottom: 100}}
-        scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollY}}}],
-          {useNativeDriver: true}
-        )}
-        ref={scrollviewRef}
-        onMomentumScrollEnd={(e: NativeSyntheticEvent<NativeScrollEvent>) => {
-          if (e.nativeEvent.contentOffset.y > HEADER_MAX_HEIGHT / 5 && e.nativeEvent.contentOffset.y < HEADER_MAX_HEIGHT) {
-            scrollviewRef.current?.scrollTo({x: 0, y: HEADER_MIN_HEIGHT + 10, animated: true});
-          }
-        }}>
         {props?.children}
-      </Animated.ScrollView>
       <Animated.View
         style={[styles.header, {transform: [{translateY: headerTranslateY}]}]}>
         <Animated.View
