@@ -157,6 +157,7 @@ export default function ReportsHeader(props: { children: React.ReactNode, select
           </VStack>
           <IconButton variant="ghost" colorScheme={"white"}
                       icon={<Icon as={Ionicons} name="chevron-forward-outline" color={"white"}/>}
+                      isDisabled={selectedDate.end!.getTime() >= new Date().getTime()}
                       onPress={onRightDateButtonPress}/>
 
         </HStack>
