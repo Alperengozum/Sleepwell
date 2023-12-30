@@ -1,9 +1,27 @@
 import React, {useRef} from "react";
 import {Animated, NativeScrollEvent, NativeSyntheticEvent, StyleSheet} from "react-native";
-import {Heading, HStack, IconButton, View} from "native-base";
+import {Heading, HStack, Icon, IconButton, Text, View, VStack} from "native-base";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import {SleepFilter} from "../../store/SleepStore";
+import {getMonthBefore} from "../../utils/DateUtils";
 
-export default function ReportsHeader(props: { children: React.ReactNode; }) {
+export default function ReportsHeader(props: { children: React.ReactNode, selectedDate: SleepFilter, setSelectedDate: React.Dispatch<React.SetStateAction<SleepFilter>> }) {
+  const {selectedDate, setSelectedDate} = props;
 
+  const onLeftDateButtonPress = () => {
+    setSelectedDate({
+      start: getMonthBefore(selectedDate.start, 1),
+      end: selectedDate.start
+    })
+  }
+  const onRightDateButtonPress = () => {
+    const monthAfter = new Date(selectedDate.end?.getTime() || 0);
+    monthAfter.setMonth(monthAfter.getMonth() + 1);
+    setSelectedDate({
+      start: selectedDate.end,
+      end: monthAfter
+    })
+  }
   const HEADER_MAX_HEIGHT = 150;
   const HEADER_MIN_HEIGHT = 80;
   const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
@@ -77,7 +95,7 @@ export default function ReportsHeader(props: { children: React.ReactNode; }) {
     },
     topBar: {
       marginTop: 120,
-      height: 10,
+      height: 120,
       alignItems: "center",
       justifyContent: "center",
       position: "absolute",
@@ -102,7 +120,10 @@ export default function ReportsHeader(props: { children: React.ReactNode; }) {
 
   return (
     <View style={styles.saveArea}>
-        {props?.children}
+      {props && props.children && React.cloneElement(props.children as React.ReactElement, {
+        selectedDate: selectedDate,
+        setSelectedDate: setSelectedDate,
+      })}
       <Animated.View
         style={[styles.header, {transform: [{translateY: headerTranslateY}]}]}>
         <Animated.View
@@ -123,12 +144,21 @@ export default function ReportsHeader(props: { children: React.ReactNode; }) {
           }
         ]}>
         <HStack justifyContent="space-between" alignItems="center" width="100%" height="100%" bgColor="black">
-          <IconButton variant="unstyled"/>
-          <Heading color="white" size="xl" letterSpacing={0.1} fontWeight="thin">
-            Reports
-          </Heading>
-          <IconButton colorScheme="purple"
-                      variant="unstyled"/>
+          <IconButton variant="ghost" colorScheme={"white"}
+                      icon={<Icon as={Ionicons} name="chevron-back-outline" color={"white"}/>}
+                      onPress={onLeftDateButtonPress}/>
+          <VStack alignItems={"center"}>
+            <Heading color="white" size="xl" letterSpacing={0.1} fontWeight="thin">
+              Reports
+            </Heading>
+            <Text color="white" fontSize="md" letterSpacing={0.1} fontWeight="thin">
+              {selectedDate.start?.toLocaleDateString()} - {selectedDate.end?.toLocaleDateString()}
+            </Text>
+          </VStack>
+          <IconButton variant="ghost" colorScheme={"white"}
+                      icon={<Icon as={Ionicons} name="chevron-forward-outline" color={"white"}/>}
+                      onPress={onRightDateButtonPress}/>
+
         </HStack>
 
       </Animated.View>

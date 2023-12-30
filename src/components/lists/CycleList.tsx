@@ -23,12 +23,14 @@ enum ListType {
 }
 
 export const createIntentAlarm = (date: Date, type?: SleepType, cycleCount?: number): void => {
+	//TODO add success modal
 	let createDate: Date = new Date();
 	startActivityAsync("android.intent.action.SET_ALARM", {
 		extra: {
 			'android.intent.extra.alarm.HOUR': date.getHours(),
 			'android.intent.extra.alarm.MESSAGE': type || SleepType.SLEEP,
 			'android.intent.extra.alarm.MINUTES': date.getMinutes(),
+			'android.intent.extra.alarm.SKIP_UI': true,
 		}
 	}).then(() => {
 		SleepStore.addSleep({

@@ -16,15 +16,18 @@ export interface Sleep {
 }
 
 export interface ISleepStore {
-
-  getSleeps(type?: SleepType, lastDayCount?: number): Array<Sleep> | undefined;
+  getSleeps(type?: SleepType, filters?:Partial<SleepFilter>): Array<Sleep> | undefined;
 
   setSleeps(sleeps: Array<Sleep>): void;
 
   addSleep(sleeps: Sleep): void;
 
   deleteSleep(id: number): void
+}
 
+export interface SleepFilter {
+  start?: Date,
+  end?: Date,
 }
 
 class SleepStore implements ISleepStore {
@@ -37,7 +40,7 @@ class SleepStore implements ISleepStore {
   }
 
 
-  getSleeps(type?: SleepType, lastDayCount?: number): Array<Sleep> | undefined {
+  getSleeps(type?: SleepType, filters?: Partial<SleepFilter>): Array<Sleep> | undefined {
     if (!this.sleeps) {
       return undefined
     }
@@ -45,10 +48,15 @@ class SleepStore implements ISleepStore {
     if (type) {
       sleeps = this.sleeps.filter((sleep) => sleep.type == type);
     }
-    if (lastDayCount) {
-        const lastDay = new Date();
-        lastDay.setMilliseconds(lastDay.getMilliseconds() - lastDayCount * 24 * 60 * 60 * 1000);
-        sleeps = sleeps.filter((sleep) => sleep.start > lastDay);
+    if (filters) {
+      if (filters.start) {
+        sleeps = sleeps.filter((sleep) => {
+          return sleep.start >= filters.start!;
+        });
+      }
+      if (filters.end) {
+        sleeps = sleeps.filter((sleep) => sleep.start <= filters.end!);
+      }
     }
     return sleeps;
   }

@@ -1,10 +1,10 @@
 import React from "react";
-import SleepStore from "../../store/SleepStore";
+import {Sleep} from "../../store/SleepStore";
 import {Observer} from "mobx-react";
 import {GenericCard} from "../cards/GenericCard";
 import {Divider, HStack, Text, VStack} from "native-base";
 
-export const SleepIndicatorChart = () => {
+export const SleepIndicatorChart = ({sleeps}: { sleeps: Array<Sleep> | undefined }) => {
 
   const averageCalculator = (arr: number[]) => arr.reduce((a, b) => a + b, 0) / arr.length
 
@@ -17,16 +17,13 @@ export const SleepIndicatorChart = () => {
   return (
     <Observer>
       {() => {
-        let data = SleepStore.getSleeps( undefined, 30)?.map((sleep) => sleep.cycle).filter((sleep) => (sleep != undefined))
-        if (!data){
-          data = [0]
-        }
-        if (data.length == 0) {
+        let data = sleeps?.map((sleep) => sleep.cycle).filter((sleep) => (sleep != undefined))
+        if (!data || data.length == 0) {
           data = [0]
         }
 
         return (
-          <GenericCard style={{marginVertical: 10, backgroundColor: "#440e6a", display: "flex"}} >
+          <GenericCard style={{marginVertical: 10, backgroundColor: "#440e6a", display: "flex"}}>
             <HStack my={5} mr={5} justifyContent="space-between" alignItems="center" textAlign="center"
                     divider={<Divider/>}>
               <VStack mx={5} flex={1} alignItems="center">
