@@ -1,9 +1,9 @@
 {
   "displayName": "Sleepwell",
   "expo": {
-    "name": "sleepwell-expo",
-    "slug": "sleepwell-expo",
-    "version": "1.0.0",
+    "name": "Sleepwell",
+    "slug": "Sleepwell",
+    "version": "0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -33,5 +33,9 @@
     "plugins": [
       "expo-localization"
     ]
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-------~------",
+    "ios_app_id": "ca-app-pub--------~------"
   }
 }

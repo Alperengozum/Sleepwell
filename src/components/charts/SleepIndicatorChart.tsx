@@ -23,7 +23,7 @@ export const SleepIndicatorChart = ({sleeps}: { sleeps: Array<Sleep> | undefined
         }
 
         return (
-          <GenericCard style={{marginVertical: 10, backgroundColor: "#440e6a", display: "flex"}}>
+          <GenericCard style={{marginVertical: 10, backgroundColor: "#3d0c5f", display: "flex"}}>
             <HStack my={5} mr={5} justifyContent="space-between" alignItems="center" textAlign="center"
                     divider={<Divider/>}>
               <VStack mx={5} flex={1} alignItems="center">

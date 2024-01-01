@@ -9,6 +9,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import {SleepIndicatorChart} from "../charts/SleepIndicatorChart";
 import {SleepLineChart} from "../charts/SleepLineChart";
 import {getMonthBefore} from "../../utils/DateUtils";
+import {SleepPieChart} from "../charts/SleepPieChart";
 
 interface List {
   name: string | number;
@@ -38,7 +39,7 @@ export const ReportsList = ({selectedDate, setSelectedDate}: ReportsListProps) =
   const getSleeps = () => {
     return SleepStore.getSleeps(SleepType.SLEEP, {
       start: selectedDate?.start || getMonthBefore(),
-      end: selectedDate?.end || new Date()
+      end: selectedDate?.end || new Date(new Date().setHours(0, 0, 0, 0))
     })
   }
   const buildList = (): Array<List> => {
@@ -73,6 +74,7 @@ export const ReportsList = ({selectedDate, setSelectedDate}: ReportsListProps) =
           }}>
             <SleepLineChart sleeps={getSleeps()}/>
             <SleepIndicatorChart sleeps={getSleeps()}/>
+            <SleepPieChart sleeps={getSleeps()}/>
           </GenericHeaderCard>
         );
       case ListType.ITEM:
