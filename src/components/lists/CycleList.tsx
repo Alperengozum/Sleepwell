@@ -7,7 +7,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import SleepStore, {SleepType} from "../../store/SleepStore";
 import SettingsStore, {SettingsType} from "../../store/SettingsStore";
 import {getCalendars} from "expo-localization";
-import {startActivityAsync} from 'expo-intent-launcher';
+import {setAlarm} from "expo-alarm";
 
 interface List {
 	name: string | number;
@@ -25,14 +25,11 @@ enum ListType {
 export const createIntentAlarm = (date: Date, type?: SleepType, cycleCount?: number): void => {
 	//TODO add success modal
 	let createDate: Date = new Date();
-	startActivityAsync("android.intent.action.SET_ALARM", {
-		extra: {
-			'android.intent.extra.alarm.HOUR': date.getHours(),
-			'android.intent.extra.alarm.MESSAGE': type || SleepType.SLEEP,
-			'android.intent.extra.alarm.MINUTES': date.getMinutes(),
-			'android.intent.extra.alarm.SKIP_UI': true,
-		}
-	}).then(() => {
+	setAlarm({
+		hour: date.getHours(),
+		minutes: date.getMinutes(),
+		message: type || SleepType.SLEEP
+	}).then((e) => {
 		SleepStore.addSleep({
 			end: date, start: createDate, type: type || SleepType.SLEEP, cycle: cycleCount || undefined
 		})

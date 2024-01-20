@@ -1,6 +1,6 @@
 {
-  "name": "sleepwell-expo",
-  "version": "1.0.0",
+  "name": "sleepwell",
+  "version": "0.2.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -20,8 +20,8 @@
     "@types/react-native-vector-icons": "^6.4.18",
     "css-color-keywords": "^1.0.0",
     "expo": "~49.0.15",
+    "expo-alarm": "^0.1.0",
     "expo-constants": "~14.4.2",
-    "expo-intent-launcher": "~10.7.0",
     "expo-localization": "~14.3.0",
     "expo-notifications": "~0.20.1",
     "expo-splash-screen": "~0.20.5",
