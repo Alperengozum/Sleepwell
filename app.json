@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,7 +20,9 @@
       "bundleIdentifier": "com.alperengozum.sleepwell"
     },
     "android": {
-      "permissions": ["com.android.alarm.permission.SET_ALARM"],
+      "permissions": [
+        "com.android.alarm.permission.SET_ALARM"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
