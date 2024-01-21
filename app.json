@@ -25,9 +25,10 @@
       ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#744EAA"
       },
-      "package": "com.alperengozum.sleepwell"
+      "package": "com.alperengozum.sleepwell",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.alperengozum.sleepwell"
     },
     "web": {
       "favicon": "./assets/favicon.png"
