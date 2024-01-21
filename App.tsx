@@ -4,15 +4,10 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from "@react-navigation/native";
 import {StatusBar} from 'react-native';
 import {MainNavigator} from "./src/router/MainNavigator";
-import SyncStorage from 'sync-storage';
 import 'react-native-reanimated'
 
 export default function App() {
 	useEffect(() => {
-		const initSyncStorage = async () => {
-			await SyncStorage.init();
-		}
-		initSyncStorage();
 		StatusBar.setHidden(true);
 		//changeNavigationBarColor("black", false, false);
 		//hideNavigationBar()

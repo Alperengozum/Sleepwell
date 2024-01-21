@@ -7,15 +7,15 @@ import {useFocusEffect} from "@react-navigation/native";
 
 export default function Reports() {
   const [selectedDate, setSelectedDate] = React.useState<SleepFilter>({
-    start: getMonthBefore(),
-    end: new Date(new Date().setHours(0, 0, 0, 0))
+    start: getMonthBefore(new Date(), 0),
+    end: getMonthBefore(new Date(), -1)
   });
 
   useFocusEffect(React.useCallback(() => {
     return () => {
       setSelectedDate({
-        start: getMonthBefore(),
-        end: new Date(new Date().setHours(0, 0, 0, 0))
+        start: getMonthBefore(new Date(), 0),
+        end: getMonthBefore(new Date(), -1)
       });
     };
   }, []))

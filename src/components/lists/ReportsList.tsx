@@ -39,7 +39,7 @@ export const ReportsList = ({selectedDate, setSelectedDate}: ReportsListProps) =
   const getSleeps = () => {
     return SleepStore.getSleeps(SleepType.SLEEP, {
       start: selectedDate?.start || getMonthBefore(),
-      end: selectedDate?.end || new Date(new Date().setHours(0, 0, 0, 0))
+      end: selectedDate?.end || getMonthBefore(new Date(), 0)
     })
   }
   const buildList = (): Array<List> => {

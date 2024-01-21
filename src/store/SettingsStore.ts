@@ -1,6 +1,5 @@
 import {action, makeAutoObservable} from "mobx";
-import SyncStorage from "sync-storage";
-import {setItem} from "../utils/AsyncStorageUtils";
+import {getItem, setItem} from "../utils/AsyncStorageUtils";
 
 export enum SettingsType {
   FALL_ASLEEP = "Fall Asleep",
@@ -30,8 +29,12 @@ class SettingsStore implements ISettingsStore {
   public settings: Array<Settings> | undefined;
 
   constructor() {
-    this.setSettings(SyncStorage.get("settings"));
-    makeAutoObservable(this);
+    getItem("settings").then(
+      (settings) => {
+        this.setSettings(settings)
+        makeAutoObservable(this);
+      }
+    )
   }
 
   getSettings(type?: SettingsType): Array<Settings> | undefined {
@@ -79,7 +82,6 @@ class SettingsStore implements ISettingsStore {
       return s;
     });
     setItem("settings", this.settings)
-
     action(async () => {
     });
   }

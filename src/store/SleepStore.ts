@@ -1,6 +1,5 @@
 import {action, makeAutoObservable} from "mobx";
-import SyncStorage from "sync-storage";
-import {setItem} from "../utils/AsyncStorageUtils";
+import {getItem, setItem} from "../utils/AsyncStorageUtils";
 
 export enum SleepType {
   SLEEP = "sleep",
@@ -35,8 +34,12 @@ class SleepStore implements ISleepStore {
   public sleeps: Array<Sleep> | undefined;
 
   constructor() {
-    this.setSleeps(SyncStorage.get("sleeps") || []);
-    makeAutoObservable(this);
+    getItem("sleeps").then(
+      (sleeps) => {
+        this.setSleeps(sleeps || [])
+        makeAutoObservable(this);
+      }
+    )
   }
 
 
@@ -51,11 +54,11 @@ class SleepStore implements ISleepStore {
     if (filters) {
       if (filters.start) {
         sleeps = sleeps.filter((sleep) => {
-          return sleep.start >= filters.start!;
+          return new Date(sleep.start)>= filters.start!;
         });
       }
       if (filters.end) {
-        sleeps = sleeps.filter((sleep) => sleep.start <= filters.end!);
+        sleeps = sleeps.filter((sleep) => new Date(sleep.start) <= filters.end!);
       }
     }
     return sleeps;
@@ -63,7 +66,7 @@ class SleepStore implements ISleepStore {
 
   setSleeps(sleeps: Array<Sleep>): void {
     this.sleeps = sleeps;
-    setItem("sleeps", this.sleeps)
+    setItem("sleeps", sleeps)
     action(async () => {
     });
   }

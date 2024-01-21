@@ -2,8 +2,8 @@ export const getMonthBefore = (date?: Date, monthCount?: number): Date => {
   if (!date) {
     date = new Date();
   }
-  if (!monthCount) {
+  if (!monthCount && monthCount !== 0) {
     monthCount = 1;
   }
-  return new Date(date.getFullYear(), date.getMonth() - monthCount, date.getDate());
+  return new Date(date.getFullYear(), date.getMonth() - monthCount, 1);
 }
