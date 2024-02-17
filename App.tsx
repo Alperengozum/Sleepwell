@@ -6,20 +6,24 @@ import {StatusBar} from 'react-native';
 import {MainNavigator} from "./src/router/MainNavigator";
 import 'react-native-reanimated'
 import * as NavigationBar from "expo-navigation-bar";
+import Toast from "react-native-toast-message";
+import {toastConfig} from "./src/components/config/ToastConfig";
 
 export default function App() {
-	useEffect(() => {
-		StatusBar.setHidden(true);
-		NavigationBar.setBackgroundColorAsync("black")
-		NavigationBar.setVisibilityAsync("hidden");
-	})
-	return (
-		<NativeBaseProvider>
-			<NavigationContainer>
-				<MainNavigator/>
-			</NavigationContainer>
-		</NativeBaseProvider>
-	);
+  useEffect(() => {
+    StatusBar.setHidden(true);
+    NavigationBar.setBackgroundColorAsync("black")
+    NavigationBar.setVisibilityAsync("hidden");
+  })
+
+  return (
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <MainNavigator/>
+        <Toast config={toastConfig}/>
+      </NavigationContainer>
+    </NativeBaseProvider>
+  );
 };
 
 
