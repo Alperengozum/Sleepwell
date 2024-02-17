@@ -4,7 +4,7 @@ import {Dimensions} from "react-native";
 import {Sleep} from "../../store/SleepStore";
 import {Observer} from "mobx-react";
 import {LineChart} from "react-native-chart-kit";
-import {Text} from "native-base";
+import {Text} from "@gluestack-ui/themed-native-base";
 
 export const SleepLineChart = ({sleeps}: {sleeps: Array<Sleep> | undefined }) => {
   return (

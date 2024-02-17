@@ -1,6 +1,6 @@
 import React from "react";
 import {FlashList} from "@shopify/flash-list";
-import {Button, HStack, Icon, Text, View, VStack} from "native-base";
+import {Button, HStack, Icon, Text, View, VStack} from "@gluestack-ui/themed-native-base";
 import {GenericCard} from "../cards/GenericCard";
 import {GenericHeaderCard} from "../cards/GenericHeaderCard";
 import {Linking} from "react-native";
@@ -41,7 +41,7 @@ export const InfoList = () => {
       link: "https://github.com/Alperengozum/Sleepwell",
       type: ListType.ITEM,
       buttonText: "Open Github Project",
-      icon: <Icon color="white" as={MaterialCommunityIcons} name="github" size="md"/>,
+      icon: <Icon color="white" as={MaterialCommunityIcons} name="github" size={6}/>,
     },
     {
       name: "Can I add new feature? 👋",
@@ -49,7 +49,7 @@ export const InfoList = () => {
       link: "https://github.com/Alperengozum/Sleepwell/pulls",
       type: ListType.ITEM,
       buttonText: "Open Github Pulls",
-      icon: <Icon color="white" as={MaterialCommunityIcons} name="github" size="md"/>,
+      icon: <Icon color="white" as={MaterialCommunityIcons} name="github" size={6}/>,
     },
     {
       name: "I have a Issue",
@@ -57,14 +57,14 @@ export const InfoList = () => {
       link: "https://github.com/Alperengozum/Sleepwell/issues",
       type: ListType.ITEM,
       buttonText: "Open Github Issues",
-      icon: <Icon color="white" as={MaterialCommunityIcons} name="github" size="md"/>,
+      icon: <Icon color="white" as={MaterialCommunityIcons} name="github" size={6}/>,
     },
     {
       name: "I want to contact you",
       desc: "Wanna mail me?",
       link: "mailto:alperengozum0@gmail.com",
       type: ListType.ITEM,
-      icon: <Icon color="white" as={Ionicons} name="send-outline" size="md"/>,
+      icon: <Icon color="white" as={Ionicons} name="send-outline" size={6}/>,
       buttonText: "Send Mail"
     },
     {
@@ -73,7 +73,7 @@ export const InfoList = () => {
       link: "https://play.google.com/store/apps/dev?id=8842825248111634874",
       type: ListType.ITEM,
       buttonText: "Open Google Play Store",
-      icon: <Icon color="white" as={MaterialCommunityIcons} name="google-play" size="md"/>,
+      icon: <Icon color="white" as={MaterialCommunityIcons} name="google-play" size={6}/>,
     }
   ]
 
@@ -95,18 +95,24 @@ export const InfoList = () => {
           if (item!.type === ListType.HEADER) {
             // Rendering header
             return <GenericHeaderCard>
-              <HStack mr={10} justifyContent="space-between" alignItems="center" textAlign="center">
+              <HStack mr={10} justifyContent="space-between" alignItems="center" sx={{
+                textAlign: "center"
+              }}>
                 <Text color="white" fontSize="lg">{item.name}</Text>
                 <Text color="white" fontSize="lg">{item.desc}</Text>
               </HStack>
             </GenericHeaderCard>;
           } else if (item.type == ListType.ITEM) {
             return <GenericCard style={{marginVertical: 10}}>
-              <HStack my={5} flex={1} justifyContent="space-between" alignItems="center" textAlign="center">
+              <HStack my={5} flex={1} justifyContent="space-between" alignItems="center" sx={{
+                textAlign: "center"
+              }}>
                 <VStack mx={5} space={2} flex={1} alignItems="center">
                   <Text color="white" fontSize="md">{item.name}</Text>
                   <Text color="gray.400" fontSize="sm">{item.desc}</Text>
-                  {item.link ? <Button endIcon={item.icon} variant="solid" colorScheme="purple" borderRadius={15}
+                  {item.link ? <Button endIcon={item.icon} variant="solid" _active={{
+                    bg: "$purple.800"
+                  }} bg={"$purple.600"} borderRadius={16}
                                        onPress={() => Linking.openURL(item.link)}>
                     {item.buttonText || "Link"}
                   </Button> : <React.Fragment/>}

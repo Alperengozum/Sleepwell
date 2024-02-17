@@ -1,6 +1,6 @@
 import React from "react";
 import {FlashList} from "@shopify/flash-list";
-import {HStack, Text, View} from "native-base";
+import {HStack, Text, View} from "@gluestack-ui/themed-native-base";
 import {GenericHeaderCard} from "../cards/GenericHeaderCard";
 import {Observer} from "mobx-react";
 import SettingsStore, {Settings, SettingsType} from "../../store/SettingsStore";

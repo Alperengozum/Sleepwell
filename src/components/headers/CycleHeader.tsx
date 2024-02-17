@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {Animated, NativeScrollEvent, NativeSyntheticEvent, StyleSheet} from "react-native";
-import {Heading, HStack, Icon, IconButton, View} from "native-base";
+import {Heading, HStack, Icon, IconButton, View} from "@gluestack-ui/themed-native-base";
 import {useNavigation} from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -145,9 +145,8 @@ export default function CycleHeader(props: { children: React.ReactNode; }) {
           <IconButton colorScheme="white"
                       borderRadius="full"
                       color="white"
-                      size="lg"
                       onPress={() => navigation.goBack()}
-                      icon={<Icon as={MaterialCommunityIcons} name="arrow-left" size="2xl" color="white"/>}
+                      icon={<Icon as={MaterialCommunityIcons} name="arrow-left" size={8} color="white"/>}
           />
           <Heading color="white" size="xl" letterSpacing={0.1} fontWeight="thin">
             Sleep until

@@ -1,4 +1,4 @@
-import {HStack, Icon, IconButton, Text, View, VStack} from "native-base";
+import {HStack, Icon, IconButton, Text, View, VStack} from "@gluestack-ui/themed-native-base";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SettingsStore, {SettingsType} from "../../store/SettingsStore";
@@ -28,18 +28,16 @@ export const FallAsleepCard = () => {
           <HStack alignItems="center" justifyContent="flex-end" space={5}>
             <IconButton colorScheme="red"
                         borderRadius="15"
-                        size="md"
                         variant="outline"
-                        icon={<Icon as={Ionicons} name="remove-outline"/>}
+                        icon={<Icon as={Ionicons} name="remove-outline" size={8}/>}
                         onPress={onMinusPress}
             />
             <Text color="white"
                   fontSize="xl">{SettingsStore.getSettings(SettingsType.FALL_ASLEEP)![0].value || 0}</Text>
             <IconButton colorScheme="emerald"
                         borderRadius="15"
-                        size="md"
                         variant="outline"
-                        icon={<Icon as={Ionicons} name="add-outline"/>}
+                        icon={<Icon as={Ionicons} name="add-outline" size={8}/>}
                         onPress={onAddPress}
             />
           </HStack>

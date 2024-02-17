@@ -1,7 +1,7 @@
 import {StyleProp, ViewStyle} from "react-native";
-import {Box} from "native-base";
+import {Box} from "@gluestack-ui/themed-native-base";
 import React from "react";
-import {InterfaceBoxProps} from "native-base/lib/typescript/components/primitives/Box";
+import {InterfaceBoxProps} from "@gluestack-ui/themed-native-base/lib/typescript/components/primitives/Box";
 
 
 export const GenericHeaderCard = (props: Props) => {

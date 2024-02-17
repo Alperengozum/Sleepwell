@@ -4,7 +4,7 @@ import {Dimensions} from "react-native";
 import {Sleep} from "../../store/SleepStore";
 import {Observer} from "mobx-react";
 import {LineChart, PieChart} from "react-native-chart-kit";
-import {Text} from "native-base";
+import {Text} from "@gluestack-ui/themed-native-base";
 
 const sleepColors = ["#f3e8ff", "#e9d5ff", "#d8b4fe", "#c084fc", "#a855f7", "#9333ea", "#7e22ce", "#6b21a8", "#581c87", "#4c1d95", "#4527a0", "#382b7f", "#2d3a59", "#27303f", "#1e213a"]
 

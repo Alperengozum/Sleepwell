@@ -2,7 +2,7 @@ import React from "react";
 import {Sleep} from "../../store/SleepStore";
 import {Observer} from "mobx-react";
 import {GenericCard} from "../cards/GenericCard";
-import {Divider, HStack, Text, VStack} from "native-base";
+import {Divider, HStack, Text, VStack} from "@gluestack-ui/themed-native-base";
 
 export const SleepIndicatorChart = ({sleeps}: { sleeps: Array<Sleep> | undefined }) => {
 

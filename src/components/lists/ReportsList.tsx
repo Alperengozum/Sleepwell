@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {FlashList} from "@shopify/flash-list";
-import {HStack, Icon, IconButton, Text, View, VStack} from "native-base";
+import {HStack, Icon, IconButton, Text, View, VStack} from "@gluestack-ui/themed-native-base";
 import {GenericCard} from "../cards/GenericCard";
 import {GenericHeaderCard} from "../cards/GenericHeaderCard";
 import SleepStore, {Sleep, SleepFilter, SleepType} from "../../store/SleepStore";
@@ -96,9 +96,10 @@ export const ReportsList = ({selectedDate, setSelectedDate}: ReportsListProps) =
                   <IconButton
                     colorScheme="red"
                     borderRadius="20"
-                    size="lg"
+                    borderColor="$red.500"
+                    borderWidth={1}
                     variant="outline"
-                    icon={<Icon as={Ionicons} name="trash-outline"/>}
+                    icon={<Icon as={Ionicons} name="trash-outline" size={6}/>}
                     onPress={() => deleteSleep(item.id as number)}
                   />
                 </HStack>

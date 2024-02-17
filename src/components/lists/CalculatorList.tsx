@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {FlashList} from "@shopify/flash-list";
-import {Box, Center, Heading, HStack, Icon, Text, View, VStack} from "native-base";
+import {Box, Center, Heading, HStack, Icon, Text, View, VStack} from "@gluestack-ui/themed-native-base";
 import {GenericCard} from "../cards/GenericCard";
 import {GenericHeaderCard} from "../cards/GenericHeaderCard";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -42,7 +42,7 @@ export const CalculatorList = () => {
         {
             name: "Sleep",
             type: ListType.HEADER,
-            icon: <Icon color="white" as={MaterialCommunityIcons} name="power-sleep" size="2xl"/>
+            icon: <Icon color="white" as={MaterialCommunityIcons} name="power-sleep" size={8}/>
         },
         {
             name: "Go to bed now",
@@ -65,7 +65,7 @@ export const CalculatorList = () => {
         {
             name: "Power nap",
             type: ListType.HEADER,
-            icon: <Icon color="white" as={MaterialCommunityIcons} name="desk" size="2xl"/>,
+            icon: <Icon color="white" as={MaterialCommunityIcons} name="desk" size={8}/>,
         },
         {
             name: "Take a power nap",

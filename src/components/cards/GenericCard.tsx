@@ -1,5 +1,5 @@
 import {StyleProp, ViewStyle} from "react-native";
-import {Box, Pressable} from "native-base";
+import {Box, Pressable} from "@gluestack-ui/themed-native-base";
 import React, {useMemo} from "react";
 
 export const GenericCard = (props: Props) => {
@@ -12,7 +12,7 @@ export const GenericCard = (props: Props) => {
       <Pressable w="100%" onPress={onPress || undefined} android_ripple={onPress ? {
         color: "#9333ea",
         borderless: false,
-        radius: 0
+        radius: 1
       } : {}}>
         {children}
       </Pressable>

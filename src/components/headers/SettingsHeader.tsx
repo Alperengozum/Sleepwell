@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {Animated, NativeScrollEvent, NativeSyntheticEvent, StyleSheet} from "react-native";
-import {Heading, HStack, IconButton, View} from "native-base";
+import {Heading, HStack, IconButton, View} from "@gluestack-ui/themed-native-base";
 
 export default function SettingsHeader(props: { children: React.ReactNode; }) {
 

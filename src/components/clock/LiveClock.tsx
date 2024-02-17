@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment";
-import {Text} from 'native-base';
+import {Text} from '@gluestack-ui/themed-native-base';
 
 export default function LiveClock(props) {
   const {is24Hour} = props;

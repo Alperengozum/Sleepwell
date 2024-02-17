@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
-import {Animated, NativeScrollEvent, NativeSyntheticEvent, StyleSheet} from "react-native";
-import {Heading, HStack, Icon, IconButton, Text, View, VStack} from "native-base";
+import {Animated, StyleSheet} from "react-native";
+import {Heading, HStack, Icon, IconButton, Text, View, VStack} from "@gluestack-ui/themed-native-base";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {SleepFilter} from "../../store/SleepStore";
 import {getMonthBefore} from "../../utils/DateUtils";
@@ -145,7 +145,7 @@ export default function ReportsHeader(props: { children: React.ReactNode, select
         ]}>
         <HStack justifyContent="space-between" alignItems="center" width="100%" height="100%" bgColor="black">
           <IconButton variant="ghost" colorScheme={"white"}
-                      icon={<Icon as={Ionicons} name="chevron-back-outline" color={"white"}/>}
+                      icon={<Icon as={Ionicons} name="chevron-back-outline" color={"white"} size={8}/>}
                       onPress={onLeftDateButtonPress}/>
           <VStack alignItems={"center"}>
             <Heading color="white" size="xl" letterSpacing={0.1} fontWeight="thin">
@@ -156,7 +156,7 @@ export default function ReportsHeader(props: { children: React.ReactNode, select
             </Text>
           </VStack>
           <IconButton variant="ghost" colorScheme={"white"}
-                      icon={<Icon as={Ionicons} name="chevron-forward-outline" color={"white"}/>}
+                      icon={<Icon as={Ionicons} name="chevron-forward-outline" color={"white"} size={8}/>}
                       isDisabled={selectedDate.end!.getTime() >= new Date().getTime()}
                       onPress={onRightDateButtonPress}/>
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Animated, NativeScrollEvent, NativeSyntheticEvent, StyleSheet} from "react-native";
-import {Heading, HStack, Icon, IconButton, Text, View, VStack} from "native-base";
+import {Heading, HStack, Icon, IconButton, Text, View, VStack} from "@gluestack-ui/themed-native-base";
 import {useLinkTo} from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import moment from "moment";
@@ -167,9 +167,8 @@ export default function CalculatorHeader(props: { children: React.ReactNode; }) 
           <IconButton
             colorScheme="purple"
             borderRadius="full"
-            size="lg"
             onPress={openInfoScreen}
-            icon={<Icon as={Ionicons} name="information-circle-outline" size="2xl"/>}
+            icon={<Icon as={Ionicons} name="information-circle-outline" size={8} />}
           />
         </HStack>
       </Animated.View>

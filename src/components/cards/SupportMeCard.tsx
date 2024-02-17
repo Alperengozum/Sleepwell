@@ -1,4 +1,4 @@
-import {Button, HStack, Icon, Text, View, VStack} from "native-base";
+import {Button, HStack, Icon, Text, View, VStack} from "@gluestack-ui/themed-native-base";
 import React, {useEffect, useState} from "react";
 import SettingsStore, {SettingsType} from "../../store/SettingsStore";
 import {GenericCard} from "./GenericCard";
@@ -54,7 +54,7 @@ export const SupportMeCard = () => {
         height:40
         }}
         >
-        <Icon color="purple.700" as={MaterialCommunityIcons} name="heart"  flex={1} size={"2xl"}/>
+        <Icon color="purple.700" as={MaterialCommunityIcons} name="heart" flex={1} size={6}/>
       </MotiView>
       </VStack>
     }
@@ -65,7 +65,7 @@ export const SupportMeCard = () => {
                      variant="solid"
                      onPress={onPress}>
         <HStack alignItems="center" space={1}>
-          <Icon color="white" as={MaterialCommunityIcons} name="play-circle-outline" size="2xl"/>
+          <Icon color="white" as={MaterialCommunityIcons} name="play-circle-outline" size={6}/>
           <Text color="white" bold>Watch</Text>
         </HStack>
       </Button>
