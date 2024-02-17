@@ -6,19 +6,39 @@ import {GenericHeaderCard} from "../cards/GenericHeaderCard";
 import {Linking} from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import {InfoList as List, ListType} from "../../domain/List";
 
-interface List {
-  name: string | number;
-  type: ListType;
-  link?: string;
-  desc?: string | number;
-  icon?: React.ReactNode;
-  buttonText?: string;
-}
-
-enum ListType {
-  HEADER,
-  ITEM
+const getRenderItem = ({item}: { item: List }): React.ReactElement => {
+  if (item!.type === ListType.HEADER) {
+    // Rendering header
+    return <GenericHeaderCard>
+      <HStack mr={10} justifyContent="space-between" alignItems="center" sx={{
+        textAlign: "center"
+      }}>
+        <Text color="white" fontSize="lg">{item.name}</Text>
+        <Text color="white" fontSize="lg">{item.desc}</Text>
+      </HStack>
+    </GenericHeaderCard>;
+  } else if (item.type == ListType.ITEM) {
+    return <GenericCard style={{marginVertical: 10}}>
+      <HStack my={5} flex={1} justifyContent="space-between" alignItems="center" sx={{
+        textAlign: "center"
+      }}>
+        <VStack mx={5} space={2} flex={1} alignItems="center">
+          <Text color="white" fontSize="md">{item.name}</Text>
+          <Text color="gray.400" fontSize="sm">{item.desc}</Text>
+          {item.link ? <Button endIcon={item.icon} variant="solid" _active={{
+            bg: "$purple.800"
+          }} bg={"$purple.600"} borderRadius={16}
+                               onPress={() => Linking.openURL(item.link)}>
+            {item.buttonText || "Link"}
+          </Button> : <React.Fragment/>}
+        </VStack>
+      </HStack>
+    </GenericCard>
+  } else {
+    return <React.Fragment/>
+  }
 }
 
 export const InfoList = () => {
@@ -91,53 +111,13 @@ export const InfoList = () => {
     <View width={"100%"} h={"100%"} mt={50}>
       <FlashList
         data={list}
-        renderItem={({item}) => {
-          if (item!.type === ListType.HEADER) {
-            // Rendering header
-            return <GenericHeaderCard>
-              <HStack mr={10} justifyContent="space-between" alignItems="center" sx={{
-                textAlign: "center"
-              }}>
-                <Text color="white" fontSize="lg">{item.name}</Text>
-                <Text color="white" fontSize="lg">{item.desc}</Text>
-              </HStack>
-            </GenericHeaderCard>;
-          } else if (item.type == ListType.ITEM) {
-            return <GenericCard style={{marginVertical: 10}}>
-              <HStack my={5} flex={1} justifyContent="space-between" alignItems="center" sx={{
-                textAlign: "center"
-              }}>
-                <VStack mx={5} space={2} flex={1} alignItems="center">
-                  <Text color="white" fontSize="md">{item.name}</Text>
-                  <Text color="gray.400" fontSize="sm">{item.desc}</Text>
-                  {item.link ? <Button endIcon={item.icon} variant="solid" _active={{
-                    bg: "$purple.800"
-                  }} bg={"$purple.600"} borderRadius={16}
-                                       onPress={() => Linking.openURL(item.link)}>
-                    {item.buttonText || "Link"}
-                  </Button> : <React.Fragment/>}
-                </VStack>
-              </HStack>
-            </GenericCard>
-          } else {
-            return <React.Fragment/>
-          }
+        renderItem={getRenderItem}
+        stickyHeaderIndices={stickyHeaderIndices}
+        getItemType={(item) => {
+          // To achieve better performance, specify the type based on the item
+          return typeof item === "string" ? "sectionHeader" : "row";
         }}
-        stickyHeaderIndices=
-          {
-            stickyHeaderIndices
-          }
-        getItemType=
-          {
-            (item) => {
-              // To achieve better performance, specify the type based on the item
-              return typeof item === "string" ? "sectionHeader" : "row";
-            }
-          }
-        estimatedItemSize=
-          {
-            10
-          }
+        estimatedItemSize={10}
       />
     </View>
   );

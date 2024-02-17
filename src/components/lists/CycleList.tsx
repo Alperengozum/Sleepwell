@@ -1,55 +1,38 @@
 import React, {useEffect, useState} from "react";
 import {FlashList} from "@shopify/flash-list";
-import {HStack, Icon, Text, View, VStack} from "@gluestack-ui/themed-native-base";
+import {HStack, Icon, Text, View, VStack, useToast, Box} from "@gluestack-ui/themed-native-base";
 import {GenericCard} from "../cards/GenericCard";
 import {GenericHeaderCard} from "../cards/GenericHeaderCard";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SleepStore, {SleepType} from "../../store/SleepStore";
 import SettingsStore, {SettingsType} from "../../store/SettingsStore";
 import {getCalendars} from "expo-localization";
-import {setAlarm} from "expo-alarm";
+import {addHours, formatHour} from "../../utils/DateUtils";
+import {createIntentAlarm} from "../../utils/AlarmUtils";
+import {List, ListType} from "../../domain/List";
 
-interface List {
-  name: string | number;
-  type: ListType;
-  desc?: string;
-  icon?: React.ReactNode;
-  onClick?: () => void;
-}
-
-enum ListType {
-  HEADER,
-  ITEM
-}
-
-export const createIntentAlarm = (date: Date, type?: SleepType, cycleCount?: number): void => {
-  //TODO add success modal
-  let createDate: Date = new Date();
-  setAlarm({
-    hour: date.getHours(),
-    minutes: date.getMinutes(),
-    message: type || SleepType.SLEEP
-  })
-  SleepStore.addSleep({
-    end: date, start: createDate, type: type || SleepType.SLEEP, cycle: cycleCount || undefined
-  })
-}
-
-export const formatHour = (hours: string, is24Hour: undefined | boolean): string => {
-  if (is24Hour) {
-    return hours;
+const getRenderItem = ({item}: { item: List }): React.ReactElement => {
+  if (item!.type === ListType.HEADER) {
+    // Rendering header
+    return <GenericHeaderCard>
+      <HStack mr={10} justifyContent="space-between" alignItems="center" textAlign="center">
+        <Text color="white" fontSize="lg">{item.name}</Text>
+        <Text color="white" fontSize="lg">{item.desc}</Text>
+      </HStack>
+    </GenericHeaderCard>;
+  } else if (item.type == ListType.ITEM) {
+    return <GenericCard style={{marginVertical: 10}} onPress={item.onClick || undefined}>
+      <HStack my={5} mr={10} justifyContent="space-between" alignItems="center" textAlign="center">
+        <VStack mx={5}>
+          <Text color="white" fontSize="lg">{item.name + " Sleep Cycles"}</Text>
+          <Text color="gray.400" fontSize="md">{"Equals " + item.name * 1.5 + " hours sleep."}</Text>
+        </VStack>
+        <Text color="purple.700" bold fontSize="xl">{item.desc}</Text>
+      </HStack>
+    </GenericCard>
   } else {
-    let formattedHours = parseInt(hours) % 12;
-    formattedHours = formattedHours ? formattedHours : 12;
-    if (formattedHours < 10) {
-      return "0" + formattedHours.toString();
-    }
-    return formattedHours.toString();
+    return <React.Fragment/>
   }
-}
-
-export const addHours = (date: Date, hours: number): Date => {
-  return new Date(date.getTime() + hours * 3600000);
 }
 
 export const CycleList = (props: { params: any; }) => {
@@ -132,30 +115,7 @@ export const CycleList = (props: { params: any; }) => {
     <View width={"100%"} h={"100%"} mt={50}>
       <FlashList
         data={list}
-        renderItem={({item}) => {
-          if (item!.type === ListType.HEADER) {
-            // Rendering header
-            return <GenericHeaderCard>
-              <HStack mr={10} justifyContent="space-between" alignItems="center" textAlign="center">
-                <Text color="white" fontSize="lg">{item.name}</Text>
-                <Text color="white" fontSize="lg">{item.desc}</Text>
-              </HStack>
-            </GenericHeaderCard>;
-          } else if (item.type == ListType.ITEM) {
-            return <GenericCard style={{marginVertical: 10}} onPress={item.onClick || undefined}>
-              <HStack my={5} mr={10} justifyContent="space-between" alignItems="center" textAlign="center">
-                <VStack mx={5}>
-                  <Text color="white" fontSize="lg">{item.name + " Sleep Cycles"}</Text>
-                  <Text color="gray.400" fontSize="md">{"Equals " + item.name * 1.5 + " hours sleep."}</Text>
-                </VStack>
-                <Text color="purple.700" bold fontSize="xl">{item.desc}</Text>
-              </HStack>
-            </GenericCard>
-          } else {
-            return <React.Fragment/>
-          }
-
-        }}
+        renderItem={getRenderItem}
         stickyHeaderIndices={stickyHeaderIndices}
         getItemType={(item) => {
           // To achieve better performance, specify the type based on the item

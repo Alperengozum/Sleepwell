@@ -10,20 +10,7 @@ import {SleepIndicatorChart} from "../charts/SleepIndicatorChart";
 import {SleepLineChart} from "../charts/SleepLineChart";
 import {getMonthBefore} from "../../utils/DateUtils";
 import {SleepPieChart} from "../charts/SleepPieChart";
-
-interface List {
-  name: string | number;
-  type: ListType;
-  desc?: string | number;
-  icon?: React.ReactNode;
-  id?: number;
-  onClick?: () => void;
-}
-
-enum ListType {
-  HEADER,
-  ITEM
-}
+import {List, ListType} from "../../domain/List";
 
 interface ReportsListProps {
   selectedDate?: SleepFilter;
@@ -130,7 +117,7 @@ export const ReportsList = ({selectedDate, setSelectedDate}: ReportsListProps) =
             estimatedItemSize={200}
             ListFooterComponent={<View height={120}>
               <Text color="white" fontSize="md" textAlign="center" mt={10}>
-                {getSleeps()?.length! > 0  ? `No more sleeps to show.\nTotal Sleeps: ${getSleeps()?.length}` : "No sleeps to show.\nWhy didn't you sleep?"}
+                {getSleeps()?.length! > 0 ? `No more sleeps to show.\nTotal Sleeps: ${getSleeps()?.length}` : "No sleeps to show.\nWhy didn't you sleep?"}
               </Text>
             </View>}
           />
