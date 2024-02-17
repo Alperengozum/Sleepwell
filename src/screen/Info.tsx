@@ -2,14 +2,14 @@ import React, {useEffect} from "react";
 import {InfoList} from "../components/lists/InfoList";
 import InfoHeader from "../components/headers/InfoHeader";
 import {useNavigation} from "@react-navigation/native";
-import {showNavigationBar} from "react-native-navigation-bar-color";
+import * as NavigationBar from 'expo-navigation-bar';
 
 export default function Info() {
   const navigation = useNavigation();
 
-  useEffect(()=>{
+  useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      showNavigationBar()
+      NavigationBar.setVisibilityAsync('visible');
     });
     return unsubscribe;
   }, [navigation])

@@ -1,6 +1,6 @@
 {
   "name": "sleepwell",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -23,6 +23,7 @@
     "expo-alarm": "^0.1.0",
     "expo-constants": "~14.4.2",
     "expo-localization": "~14.3.0",
+    "expo-navigation-bar": "~2.3.0",
     "expo-notifications": "~0.20.1",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
@@ -38,7 +39,6 @@
     "react-native-gesture-handler": "~2.12.0",
     "react-native-google-mobile-ads": "12.6.0",
     "react-native-material-datetime-picker": "^0.2.1",
-    "react-native-navigation-bar-color": "^2.0.1",
     "react-native-reanimated": "3.3.0",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
