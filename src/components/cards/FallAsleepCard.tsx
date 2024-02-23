@@ -26,19 +26,21 @@ export const FallAsleepCard = () => {
         </VStack>
         <View flex={1}>
           <HStack alignItems="center" justifyContent="flex-end" space={5}>
-            <IconButton colorScheme="red"
-                        borderRadius="15"
-                        variant="outline"
-                        icon={<Icon as={Ionicons} name="remove-outline" size={8}/>}
-                        onPress={onMinusPress}
+            <IconButton
+              colorScheme="dark"
+              borderRadius="15"
+              variant="subtle"
+              icon={<Icon as={Ionicons} name="remove-outline" size={8}/>}
+              onPress={onMinusPress}
             />
             <Text color="white"
                   fontSize="xl">{SettingsStore.getSettings(SettingsType.FALL_ASLEEP)![0].value || 0}</Text>
-            <IconButton colorScheme="emerald"
-                        borderRadius="15"
-                        variant="outline"
-                        icon={<Icon as={Ionicons} name="add-outline" size={8}/>}
-                        onPress={onAddPress}
+            <IconButton
+              colorScheme="dark"
+              borderRadius="15"
+              variant="subtle"
+              icon={<Icon as={Ionicons} name="add-outline" size={8}/>}
+              onPress={onAddPress}
             />
           </HStack>
         </View>

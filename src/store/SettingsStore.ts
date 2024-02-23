@@ -3,12 +3,13 @@ import {getItem, setItem} from "../utils/AsyncStorageUtils";
 
 export enum SettingsType {
   FALL_ASLEEP = "Fall Asleep",
-  SUPPORT_ME = "Support Me"
+  SUPPORT_ME = "Support Me",
+  WELCOME = "Welcome",
 }
 
 export interface Settings {
   type: SettingsType
-  value: string | number | undefined,
+  value: string | number | boolean | undefined,
   id?: number
 }
 
@@ -27,11 +28,13 @@ export interface ISettingsStore {
 class SettingsStore implements ISettingsStore {
 
   public settings: Array<Settings> | undefined;
+  public loading: boolean = true;
 
   constructor() {
     getItem("settings").then(
       (settings) => {
         this.setSettings(settings)
+        this.loading = false;
         makeAutoObservable(this);
       }
     )
@@ -74,10 +77,10 @@ class SettingsStore implements ISettingsStore {
     });
   }
 
-  editSetting(type: SettingsType, value: string | number | undefined): void {
+  editSetting(type: SettingsType, value: string | number | boolean | undefined): void {
     this.settings = this.settings?.map((s) => {
       if (s.type == type) {
-         s.value = value;
+        s.value = value;
       }
       return s;
     });

@@ -86,8 +86,8 @@ android {
         applicationId 'com.alperengozum.sleepwell'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 200002
-        versionName "0.2.2"
+        versionCode 200003
+        versionName "0.2.3"
 
         buildConfigField("boolean", "REACT_NATIVE_UNSTABLE_USE_RUNTIME_SCHEDULER_ALWAYS", (findProperty("reactNative.unstable_useRuntimeSchedulerAlways") ?: true).toString())
     }

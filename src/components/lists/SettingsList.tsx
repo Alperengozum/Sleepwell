@@ -7,6 +7,7 @@ import SettingsStore, {Settings, SettingsType} from "../../store/SettingsStore";
 import {FallAsleepCard} from "../cards/FallAsleepCard";
 import {SupportMeCard} from "../cards/SupportMeCard";
 import {List, ListType} from "../../domain/List";
+import {WelcomeCard} from "../cards/WelcomeCard";
 
 const getRenderItem = ({item}: { item: List }): React.ReactElement => {
   if (item!.type === ListType.HEADER) {
@@ -23,6 +24,8 @@ const getRenderItem = ({item}: { item: List }): React.ReactElement => {
         return <FallAsleepCard/>
       case SettingsType.SUPPORT_ME:
         return <SupportMeCard/>
+      case SettingsType.WELCOME:
+        return <WelcomeCard/>
       default:
         return <React.Fragment/>
     }

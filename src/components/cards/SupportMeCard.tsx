@@ -1,5 +1,5 @@
 import {Button, HStack, Icon, Text, View, VStack} from "@gluestack-ui/themed-native-base";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import SettingsStore, {SettingsType} from "../../store/SettingsStore";
 import {GenericCard} from "./GenericCard";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -11,7 +11,7 @@ export const SupportMeCard = () => {
 
   const adUnitId = TestIds.REWARDED;
 
-  const { isLoaded, isClosed, load, show } = useRewardedAd(adUnitId, {
+  const {isLoaded, isClosed, load, show} = useRewardedAd(adUnitId, {
     requestNonPersonalizedAdsOnly: true,
   });
 
@@ -32,45 +32,46 @@ export const SupportMeCard = () => {
 
   const RenderButton = () => {
     const lastSupportedTime = SettingsStore.getSettings(SettingsType.SUPPORT_ME);
-    if (isClosed || (lastSupportedTime && (lastSupportedTime[0]?.value as number +  60 * 60 * 1000 * 3) > moment().toDate().getTime())){
+    if (isClosed || (lastSupportedTime && (lastSupportedTime[0]?.value as number + 60 * 60 * 1000 * 3) > moment().toDate().getTime())) {
       return <VStack space={1} alignItems="center">
         {
-          lastSupportedTime && (lastSupportedTime[0]?.value as number +  60 * 60 * 1000 * 3) > moment().toDate().getTime() ?
-            <Text color="white"> You can come back {moment(lastSupportedTime[0]?.value as number +  60 * 60 * 1000 * 3).fromNow()} </Text> : <React.Fragment/>
+          lastSupportedTime && (lastSupportedTime[0]?.value as number + 60 * 60 * 1000 * 3) > moment().toDate().getTime() ?
+            <Text color="white"> You can come
+              back {moment(lastSupportedTime[0]?.value as number + 60 * 60 * 1000 * 3).fromNow()} </Text> :
+            <React.Fragment/>
         }
         <Text color="white">Thanks!</Text>
         <MotiView
-        from={{
-          scale: 1
-        }}
-        animate={{
-          scale: 5
-        }}
-        transition={{
-          type: "spring",
-          repeat: 4
-        }}
-        style={{
-        height:40
-        }}
+          from={{
+            scale: 1
+          }}
+          animate={{
+            scale: 5
+          }}
+          transition={{
+            type: "spring",
+            repeat: 4
+          }}
+          style={{
+            height: 40
+          }}
         >
-        <Icon color="purple.700" as={MaterialCommunityIcons} name="heart" flex={1} size={6}/>
-      </MotiView>
+          <Icon color="$purple.700" as={MaterialCommunityIcons} name="heart" flex={1} size={6}/>
+        </MotiView>
       </VStack>
     }
-    if (isLoaded){
-      return <Button colorScheme="emerald"
-                     borderRadius="15"
-                     size="md"
-                     variant="solid"
-                     onPress={onPress}>
-        <HStack alignItems="center" space={1}>
-          <Icon color="white" as={MaterialCommunityIcons} name="play-circle-outline" size={6}/>
-          <Text color="white" bold>Watch</Text>
-        </HStack>
+    if (isLoaded) {
+      return <Button
+        endIcon={<Icon color="white" as={MaterialCommunityIcons} name="play-circle-outline" size={6}/>}
+        bg={"$purple.800"}
+        _active={{
+          bg: "$purple.600"
+        }}
+        borderRadius={16}
+        onPress={onPress}>
+        Watch
       </Button>
-    }
-    else {
+    } else {
       return <Text color="white">Please wait...</Text>
     }
   }
@@ -83,7 +84,7 @@ export const SupportMeCard = () => {
           <Text color="gray.400" fontSize="md">Support me with watching ad</Text>
         </VStack>
         <View flex={1}>
-            <RenderButton/>
+          <RenderButton/>
         </View>
       </HStack>
     </GenericCard>
